@@ -5,6 +5,8 @@ class Cell
     @start = start
   end
 
+  attr_accessor :color, :goal, :start
+
   def color
     return @color
   end
