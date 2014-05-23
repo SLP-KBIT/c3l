@@ -7,17 +7,11 @@ class Cell
 
   attr_accessor :color, :goal, :start
 
-  def color
-    return @color
-  end
-
   def start?
-    return true if @start
-    return false
+    @start == true
   end
 
   def goal?
-    return true if @goal
-    return false
+    @goal == true
   end
 end
