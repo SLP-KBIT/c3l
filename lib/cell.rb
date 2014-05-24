@@ -1,11 +1,12 @@
 class Cell
+  attr_reader   :color
+  attr_accessor :goal, :start
+
   def initialize(color: :clear, goal: false, start: false)
     @color = color
     @goal = goal
     @start = start
   end
-
-  attr_accessor :color, :goal, :start
 
   def start?
     @start == true
