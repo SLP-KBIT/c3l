@@ -5,9 +5,9 @@ class Card
 
   attr_reader :number
 
-  def initialize(color)
-    raise 'given color is not allowed' unless COLORS.include? color
-    @color = color
+  def initialize(color=nil)
+    raise 'given color is not allowed' if color && !COLORS.include?(color)
+    @color = color || COLORS.sample
     @number = 1
   end
 
