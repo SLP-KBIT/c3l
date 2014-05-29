@@ -1,23 +1,27 @@
-class Cell
-  COLOR_CLEAR = :clear
-  COLOR_RED   = :red
-  COLOR_BLUE  = :blue
-  COLORS = [ COLOR_CLEAR, COLOR_RED, COLOR_BLUE ]
+module Cell
+  class Base
+    COLOR_CLEAR = :clear
+    COLOR_RED   = :red
+    COLOR_BLUE  = :blue
+    COLORS = [ COLOR_CLEAR, COLOR_RED, COLOR_BLUE ]
 
-  attr_reader   :color
-  attr_accessor :goal, :start
+    attr_reader :color, :type
 
-  def initialize(color: nil, goal: false, start: false)
-    @color = color || COLORS.sample
-    @goal = goal
-    @start = start
+    def initialize(color: nil)
+      @color = color || COLORS.sample
+    end
+
+    def type
+      self.class.to_s.split("::").last.downcase.to_sym
+    end
   end
 
-  def start?
-    @start == true
+  class Normal < Base
   end
 
-  def goal?
-    @goal == true
+  class Start < Base
+  end
+
+  class Goal < Base
   end
 end
