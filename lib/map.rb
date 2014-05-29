@@ -3,17 +3,20 @@ require File.expand_path('../cell', __FILE__)
 class Map
   attr_accessor :cells
 
-  def initialize(size: 3, start_x: 0 , start_y: size-1, goal_x: size-1, goal_y: 0)
-    @size = size
-    @cells = create_cells
+  def initialize(size=3)
+    @cells = create_cells(size)
     set_start
     set_goal
   end
 
+  def size
+    @size ||= @cells.first.size
+  end
+
   private
 
-  def create_cells
-    cells = Array.new(@size) { Array.new(@size) }
+  def create_cells(size)
+    cells = Array.new(size) { Array.new(size) }
     cells.map! { |line| line.map! { |cell| cell = Cell::Normal.new } }
   end
 
