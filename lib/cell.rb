@@ -7,7 +7,8 @@ module Cell
 
     attr_reader :color, :type
 
-    def initialize(color=nil)
+    def initialize(x, y ,color=nil)
+      @point = Point.new(x, y)
       @color = color || COLORS.sample
     end
 
@@ -25,3 +26,5 @@ module Cell
   class Goal < Base
   end
 end
+
+Point = Struct.new(:x, :y)

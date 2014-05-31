@@ -17,18 +17,19 @@ class Map
 
   def create_cells(size)
     cells = Array.new(size) { Array.new(size) }
-    cells.map! { |line| line.map! { |cell| cell = Cell::Normal.new } }
+    cells.map!.with_index { |line, y| line.map!.with_index { |cell, x| cell = Cell::Normal.new(x, y) } }
   end
 
   def set_start
     top_line = @cells.first
     index = (0...top_line.size).to_a.sample
-    top_line[index] = Cell::Start.new
+    top_line[index] = Cell::Start.new(index, 0)
   end
 
   def set_goal
     bottom_line = @cells.last
     index = (0...bottom_line.size).to_a.sample
-    bottom_line[index] = Cell::Goal.new
+    y = @cells.map(&:first).size
+    bottom_line[index] = Cell::Goal.new(index, y)
   end
 end
