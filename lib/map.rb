@@ -15,8 +15,12 @@ class Map
 
   private
 
+  def create_2d_array(size)
+    Array.new(size) { Array.new(size) }
+  end
+
   def create_cells(size)
-    cells = Array.new(size) { Array.new(size) }
+    cells = create_2d_array(size)
     cells.map!.with_index { |line, y| line.map!.with_index { |cell, x| cell = Cell::Normal.new(x, y) } }
   end
 
