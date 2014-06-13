@@ -19,6 +19,18 @@ shared_examples_for "colored cell" do
       it { expect(red.color).to eq(:red) }
     end
   end
+
+  describe ".red?" do
+    pending "should be implemented"
+  end
+
+  describe ".blue?" do
+    pending "should be implemented"
+  end
+
+  describe ".clear?" do
+    pending "should be implemented"
+  end
 end
 
 describe Cell::Base do
