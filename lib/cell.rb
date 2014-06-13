@@ -14,6 +14,14 @@ module Cell
     def type
       self.class.to_s.split("::").last.downcase.to_sym
     end
+
+    def start?
+      self.type == :start
+    end
+
+    def goal?
+      self.type == :goal
+    end
   end
 
   class Normal < Base

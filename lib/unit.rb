@@ -1,8 +1,8 @@
 class Unit
   attr_reader :pos
 
-  def initialize
-    @pos = Point.new(0,0)
+  def initialize(point)
+    @pos = point
   end
 
   def to_s

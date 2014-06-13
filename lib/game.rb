@@ -8,8 +8,8 @@ end
 class Game
   attr_reader :map
   def initialize
-    @map = Map.new(5)
-    @unit = Unit.new
+    @map = Map.new 5
+    @unit = Unit.new @map.start_point
   end
 
   def show_map

@@ -11,6 +11,22 @@ class Map < Array
     self[y][x]
   end
 
+  def start_point
+    self.map.with_index{ |line, y|
+      line.map.with_index { |cell, x|
+       return Point.new(x, y) if cell.start?
+      }
+    }.compact
+  end
+
+  def goal_point
+    self.map.with_index{ |line, y|
+      line.map.with_index { |cell, x|
+       return Point.new(x, y) if cell.goal?
+      }
+    }.compact
+  end
+
   private
 
   def create_2d_array(size)
