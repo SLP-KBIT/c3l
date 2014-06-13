@@ -11,7 +11,7 @@ class Game
   end
 
   def show_map
-    @map.cells.map { |line|
+    @map.map { |line|
       line.map { |cell|
         str = ' ' if cell.color == :clear
         str ||= Rainbow(' ').bg(cell.color)
