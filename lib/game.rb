@@ -14,7 +14,7 @@ class Game
 
   def show_map
     visualizer = Visualizer.new(map: @map)
-    visualizer.visualize()
+    visualizer.visualize
   end
 
   def run

@@ -1,5 +1,4 @@
 class Visualizer
-  attr_reader :map
   def initialize(map: nil, unit: nil)
     @map = map
     @unit = unit
