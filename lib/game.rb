@@ -13,7 +13,7 @@ class Game
   end
 
   def show_map
-    visualizer = Visualizer.new(map: @map)
+    visualizer = Visualizer.new(map: @map, unit: @unit)
     visualizer.visualize
   end
 
