@@ -17,11 +17,20 @@ module Cell
   end
 
   class Normal < Base
+    def to_s
+      " "
+    end
   end
 
   class Start < Base
+    def to_s
+      "S"
+    end
   end
 
   class Goal < Base
+    def to_s
+      "G"
+    end
   end
 end
