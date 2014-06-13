@@ -1,8 +1,9 @@
 require 'bundler'
 Bundler.require
 
-require File.expand_path('../map', __FILE__)
-require File.expand_path('../unit', __FILE__)
+%w(map unit point).each do |file|
+  require File.expand_path("../#{file}", __FILE__)
+end
 
 class Game
   attr_reader :map
