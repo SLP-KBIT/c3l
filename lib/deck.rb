@@ -35,9 +35,8 @@ module Deck
       @cards.push card
     end
 
-    def offer(card=nil)
-      raise 'cannot pull any card, it is emply.' if @cards.empty?
-      return @cards.shift if card.nil?
+    def offer
+      @cards.shift
     end
   end
 
