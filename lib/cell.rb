@@ -8,7 +8,7 @@ module Cell
     attr_reader :color, :type
 
     def initialize
-      COLORS.sample
+      @color = COLORS.sample
     end
 
     def type
