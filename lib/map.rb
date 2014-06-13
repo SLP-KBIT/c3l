@@ -1,16 +1,14 @@
 require File.expand_path('../cell', __FILE__)
 
-class Map
-  attr_accessor :cells
-
+class Map < Array
   def initialize(size=3)
-    @cells = create_cells(size)
+    self.concat create_cells(size)
     set_start
     set_goal
   end
 
-  def size
-    @size ||= @cells.first.size
+  def cell(x: nil, y: nil)
+    self[y][x]
   end
 
   private
@@ -21,19 +19,19 @@ class Map
 
   def create_cells(size)
     cells = create_2d_array(size)
-    cells.map!.with_index { |line, y| line.map!.with_index { |cell, x| cell = Cell::Normal.new(x, y) } }
+    cells.map!.with_index { |line, y| line.map!.with_index { |cell, x| cell = Cell::Normal.new } }
   end
 
   def set_start
-    top_line = @cells.first
+    top_line = self.first
     index = (0...top_line.size).to_a.sample
-    top_line[index] = Cell::Start.new(index, 0)
+    top_line[index] = Cell::Start.new
   end
 
   def set_goal
-    bottom_line = @cells.last
+    bottom_line = self.last
     index = (0...bottom_line.size).to_a.sample
-    y = @cells.map(&:first).size
-    bottom_line[index] = Cell::Goal.new(index, y)
+    y = self.map(&:first).size
+    bottom_line[index] = Cell::Goal.new
   end
 end
