@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-%w(map unit point).each do |file|
+%w(map unit point visualizer).each do |file|
   require File.expand_path("../#{file}", __FILE__)
 end
 
@@ -9,15 +9,12 @@ class Game
   attr_reader :map
   def initialize
     @map = Map.new(5)
+    @unit = Unit.new
   end
 
   def show_map
-    @map.map { |line|
-      line.map { |cell|
-        str = ' ' if cell.color == :clear
-        str ||= Rainbow(' ').bg(cell.color)
-      }.join
-    }.join("\n")
+    visualizer = Visualizer.new(map: @map)
+    visualizer.visualize()
   end
 
   def run
