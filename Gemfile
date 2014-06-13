@@ -6,3 +6,5 @@ gem 'rspec'
 gem 'rainbow'
 gem 'pry'
 gem 'pry-doc'
+
+gem 'metric_fu'
