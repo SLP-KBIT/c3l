@@ -8,7 +8,8 @@ class Map < Array
   end
 
   def cell(x: nil, y: nil)
-    self[y][x]
+    return nil if x < 0 || y < 0
+    self[y][x] if self[y]
   end
 
   def start_point
@@ -25,6 +26,12 @@ class Map < Array
        return Point.new(x, y) if cell.goal?
       }
     }.compact
+  end
+
+  def try_move base_pos, dir
+    pos = base_pos + Point.create_from_dir(dir)
+    return nil unless self.cell(x: pos.x, y: pos.y)
+    return pos
   end
 
   private

@@ -1,6 +1,5 @@
-module Visualizer::CUI
-
-  class Visualizer
+module Visualizer
+  class CUI
     def initialize(map: nil, unit: nil)
       @map = map
       @unit = unit

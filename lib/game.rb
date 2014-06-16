@@ -18,5 +18,4 @@ class Game
       turn.run
     end
   end
-
 end
