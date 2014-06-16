@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-%w(map unit point visualizer).each do |file|
+%w(map unit point visualizer turn).each do |file|
   require File.expand_path("../#{file}", __FILE__)
 end
 
@@ -12,12 +12,11 @@ class Game
     @unit = Unit.new @map.start_point
   end
 
-  def show_map
-    visualizer = Visualizer.new(map: @map, unit: @unit)
-    visualizer.visualize
+  def run
+    loop do
+      turn = Turn.new(map: @map, unit: @unit)
+      turn.run
+    end
   end
 
-  def run
-    puts show_map
-  end
 end
