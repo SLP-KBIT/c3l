@@ -16,6 +16,15 @@ class Game
     loop do
       turn = Turn.new(map: @map, unit: @unit)
       turn.run
+      if goaled?
+        puts "congraturation!!"
+        exit 0
+      end
     end
+  end
+
+  def goaled?
+    goal = @map.goal_point
+    @unit.pos == goal
   end
 end

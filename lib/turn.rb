@@ -19,7 +19,6 @@ class Turn
   def unit_action
     dir = read_action
     @unit.move dir
-    p unit_pos: @unit.pos
   end
 
   def read_action
@@ -27,11 +26,7 @@ class Turn
       print input_description
       input_dir = get_dir(gets.chomp)
 
-
-      next if input_dir.nil?
-      tmp = @map.try_move(@unit.pos, input_dir)
-      p try_move: tmp
-      next if tmp.nil?
+      next if input_dir.nil? || @map.try_move(@unit.pos, input_dir).nil?
 
       return input_dir
     end
