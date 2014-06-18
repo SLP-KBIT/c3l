@@ -1,5 +1,5 @@
 class Turn
-  attr_reader :map, :unit
+  attr_reader :map, :unit, :player_logic
   def initialize(round)
     @map = round.map
     @player_logic = round.player_logic
@@ -19,8 +19,8 @@ class Turn
   end
 
   def unit_action
-    dir = UI.read_action(false, self)
-    @unit.action(dir.keys.first, dir.values.first)
+    action = UI.read_action(self, true)
+    @unit.action(action.keys.first, action.values.first)
   end
 
   # ロジックファイルによる自動操作
