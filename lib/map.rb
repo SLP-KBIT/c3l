@@ -34,6 +34,18 @@ class Map < Array
     return pos
   end
 
+  # base_pointの座標を起点にその周囲sizeマスだけのMapを切り出して、UnitMapを生成する
+  def create_unit_map(base_point, size)
+    unit_map_base = self.select.with_index { |line, y|
+      y.between?(base_point.y - size, base_point.y + size)
+    }.map { |line|
+      line.select.with_index { |cell, x|
+        x.between?(base_point.x - size, base_point.x + size)
+      }
+    }
+    return UnitMap.new(unit_map_base)
+  end
+
   private
 
   def create_2d_array(size)
@@ -56,5 +68,12 @@ class Map < Array
     index = (0...bottom_line.size).to_a.sample
     y = self.map(&:first).size
     bottom_line[index] = Cell::Goal.new
+  end
+end
+
+
+class UnitMap < Map
+  def initialize(map)
+    self.concat map.dup
   end
 end

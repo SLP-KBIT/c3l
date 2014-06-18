@@ -1,7 +1,9 @@
 class Turn
-  def initialize(map: map, unit: unit)
-    @map = map
-    @unit = unit
+  attr_reader :map, :unit
+  def initialize(round)
+    @map = round.map
+    @player_logic = round.player_logic
+    @unit = @player_logic.unit
   end
 
   def run
@@ -17,42 +19,12 @@ class Turn
   end
 
   def unit_action
-    dir = read_action
+    dir = UI.read_action(false, self)
     @unit.move dir
   end
 
-  def read_action
-    loop do
-      print input_description
-      input_dir = get_dir(gets.chomp)
-
-      next if input_dir.nil? || @map.try_move(@unit.pos, input_dir).nil?
-
-      return input_dir
-    end
-  end
-
-
-  def get_dir str
-    return input_dir_hash[str]
-  end
-
-  def input_description
-    "\n" + "[U]:up  [D]:down [R]:right [L]:left" + "\n" + "> "
-  end
-
-  def input_dir_hash
-    {
-      # u,d,r,k from name
-      "u" => :up,
-      "d" => :down,
-      "r" => :right,
-      "l" => :left,
-      # hjkl from vim
-      "k" => :up,
-      "j" => :down,
-      "l" => :right,
-      "h" => :left
-    }
+  # ロジックファイルによる自動操作
+  def load_action
+    @round.player_logic.play
   end
 end
