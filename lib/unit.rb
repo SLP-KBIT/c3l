@@ -5,8 +5,12 @@ class Unit
     @pos = point
   end
 
-  def move dir
+  def walk dir
     @pos = @pos + Point.create_from_dir(dir)
+  end
+
+  def action(method, arg)
+    self.__send__(method, arg)
   end
 
   def to_s

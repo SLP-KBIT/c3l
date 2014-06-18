@@ -20,7 +20,7 @@ class Turn
 
   def unit_action
     dir = UI.read_action(false, self)
-    @unit.move dir
+    @unit.action(dir.keys.first, dir.values.first)
   end
 
   # ロジックファイルによる自動操作

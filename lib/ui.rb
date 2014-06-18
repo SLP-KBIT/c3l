@@ -12,7 +12,7 @@ class UI
         input_dir = get_dir(gets.chomp)
         next if input_dir.nil? || turn.map.try_move(turn.unit.pos, input_dir).nil?
       end
-      return input_dir
+      return { walk: input_dir}
     end
   end
 

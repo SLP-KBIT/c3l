@@ -10,6 +10,7 @@ module PlayerLogic
     def walk dir
       @unit.move(dir)
       @action_count -= 1
+      return {walk: dir}
     end
 
     def play
