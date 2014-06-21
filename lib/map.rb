@@ -77,7 +77,6 @@ class Map < Array
     bottom_line = self.last
     y = self.map(&:first).size - 1
     index = (0...bottom_line.size).to_a.sample
-    y = self.map(&:first).size
     bottom_line[index] = Cell::Goal.new(x: index, y: y)
   end
 end

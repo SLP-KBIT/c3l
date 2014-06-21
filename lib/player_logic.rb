@@ -14,11 +14,18 @@ module PlayerLogic
 
     def walk dir
       @action_count -= 1
-      result = @unit_map.try_move(unit.pos, dir)
-      raise "out of range" if result.nil?
+      raise "out of range" unless movable? dir
       return {walk: dir}
     end
 
+    # 指定方向1マス先のセルが移動可能かをどうかを取得する
+    def movable? dir
+      ! @unit_map.try_move(unit.pos, dir).nil?
+    end
+
+
+    # 行動AIの記述先
+    # 1ターンごとのUnitの振る舞い
     def play
       walk :down
     end
