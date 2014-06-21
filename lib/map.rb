@@ -8,9 +8,16 @@ class Map < Array
   end
 
   def cell(x: nil, y: nil)
-    return nil if x < 0 || y < 0
-    self[y][x] if self[y]
+    pos = Point.new(x, y)
+    result = self.map { |line|
+      line.map { |cell|
+        cell if cell.point == pos
+      }.compact
+    }.flatten.first
+
+    return result
   end
+
 
   def start_point
     self.map.with_index{ |line, y|
@@ -36,6 +43,8 @@ class Map < Array
 
   # base_pointの座標を起点にその周囲sizeマスだけのMapを切り出して、UnitMapを生成する
   def create_unit_map(base_point, size)
+    new_map = create_cells(1 + 2*size)
+
     unit_map_base = self.select.with_index { |line, y|
       y.between?(base_point.y - size, base_point.y + size)
     }.map { |line|
@@ -44,6 +53,7 @@ class Map < Array
       }
     }
     return UnitMap.new(unit_map_base)
+    return UnitMap.new(result)
   end
 
   private
@@ -54,20 +64,21 @@ class Map < Array
 
   def create_cells(size)
     cells = create_2d_array(size)
-    cells.map!.with_index { |line, y| line.map!.with_index { |cell, x| cell = Cell::Normal.new } }
+    cells.map!.with_index { |line, y| line.map!.with_index { |cell, x| cell = Cell::Normal.new(x: x, y: y) } }
   end
 
   def set_start
     top_line = self.first
     index = (0...top_line.size).to_a.sample
-    top_line[index] = Cell::Start.new
+    top_line[index] = Cell::Start.new(x: index, y: 0)
   end
 
   def set_goal
     bottom_line = self.last
+    y = self.map(&:first).size - 1
     index = (0...bottom_line.size).to_a.sample
     y = self.map(&:first).size
-    bottom_line[index] = Cell::Goal.new
+    bottom_line[index] = Cell::Goal.new(x: index, y: y)
   end
 end
 

@@ -7,7 +7,10 @@ class Turn
   end
 
   def run
+    map_range = 1
+    @player_logic.add_unit_map(@map.create_unit_map(@unit.pos, map_range))
     puts show_map
+    puts
     unit_action
   end
 
@@ -19,7 +22,8 @@ class Turn
   end
 
   def unit_action
-    action = UI.read_action(self, true)
+    # action = UI.read_action(self, false) # 手動操作
+    action = UI.read_action(self, true) # 自動操作
     @unit.action(action.keys.first, action.values.first)
   end
 

@@ -5,10 +5,11 @@ module Cell
     COLOR_BLUE  = :blue
     COLORS = [ COLOR_CLEAR, COLOR_RED, COLOR_BLUE ]
 
-    attr_reader :color, :type
+    attr_reader :color, :point
 
-    def initialize
+    def initialize(x: 0, y: 0)
       @color = COLORS.sample
+      @point = Point.new(x, y)
     end
 
     def type
