@@ -22,9 +22,13 @@ class Turn
   end
 
   def unit_action
-    # action = UI.read_action(self, false) # 手動操作
-    action = UI.read_action(self, true) # 自動操作
-    @unit.action(action.keys.first, action.values.first)
+    auto_flag = true
+    unless auto_flag
+      action = UI.read_action(self, false)
+    end
+    @player_logic.play
+    # @unit.action(action.keys.first, action.values.first)
+    @unit.act
   end
 
   # ロジックファイルによる自動操作

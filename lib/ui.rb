@@ -14,7 +14,6 @@ class UI
         return { walk: input_dir}
       end
     end
-    action = turn.player_logic.play
   end
 
   def self.get_dir str
