@@ -22,11 +22,16 @@ class Turn
   end
 
   def unit_action
-    auto_flag = true
-    unless auto_flag
-      action = UI.read_action(self)
-    end
-    load_action
+    auto_flag = false
+    return input_action unless auto_flag
+    return load_action
+  end
+
+  # ユーザの入力による手動操作
+  def input_action
+    action = UI.read_action(self)
+    @unit.add_action(action.keys.first, action.values.first)
+    @unit.act
   end
 
   # ロジックファイルによる自動操作
