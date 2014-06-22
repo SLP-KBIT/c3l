@@ -24,15 +24,14 @@ class Turn
   def unit_action
     auto_flag = true
     unless auto_flag
-      action = UI.read_action(self, false)
+      action = UI.read_action(self)
     end
-    @player_logic.play
-    # @unit.action(action.keys.first, action.values.first)
-    @unit.act
+    load_action
   end
 
   # ロジックファイルによる自動操作
   def load_action
-    @round.player_logic.play
+    @player_logic.play
+    @unit.act
   end
 end
